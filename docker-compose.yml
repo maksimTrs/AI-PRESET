@@ -83,9 +83,7 @@ services:
     volumes:
       - open-webui:/app/backend/data
     environment:
-      - OPENID_CONFIG_ENABLED=false
-      - AUTH_DISABLED=true
-      - DEFAULT_USER_ROLE=admin
+      - WEBUI_AUTH=false
 
   postgres:
     image: pgvector/pgvector:pg16
