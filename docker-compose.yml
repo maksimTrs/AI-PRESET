@@ -73,7 +73,7 @@ x-init-ollama: &init-ollama
       #OLLAMA_HOST=ollama:11434 ollama pull starcoder2:7b
       
       # Pull embedding model
-      OLLAMA_HOST=ollama:11434 ollama pull mxbai-embed-large
+      OLLAMA_HOST=ollama:11434 ollama pull nomic-embed-text
 
 services:
   open-webui:
