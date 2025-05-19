@@ -189,7 +189,7 @@ The stack includes all components needed for Retrieval-Augmented Generation (RAG
 3. Configure Ollama:
    - Go to Settings → Models
    - Add Ollama endpoint: `http://ollama:11434` (internal Docker network)
-   - Select from available models (default: `qwen3:30b-a3b-q4_K_M`, `gemma3:12b-it-qat`)
+   - Select from available models (default: `llama3.1:8b`, `qwen3:30b-a3b-q4_K_M`, `gemma3:12b-it-qat`, `mistral-small3.1:24b`)
 
 Open WebUI provides a ChatGPT-like interface for interacting with your local LLMs.
 
@@ -286,14 +286,15 @@ To change or add Ollama models:
 5. Update your n8n credentials and Open WebUI settings to use the new models
 
 Default active models:
+- `llama3.1:8b` (chat model)
 - `qwen3:30b-a3b-q4_K_M` (chat model)
 - `gemma3:12b-it-qat` (chat model)
-- `mxbai-embed-large` (embedding model)
-- `qwen2.5:14b-instruct-q4_K_M` (chat model)
+- `mistral-small3.1:24b` (chat model)
+- `nomic-embed-text` (embedding model)
 
 Additional models available (commented out by default):
+- `deepseek-r1:14b` (chat model)
 - `qwen2.5-coder:14b` (code-specialized model)
-- `deepseek-coder-v2:16b` (code-specialized model)
 - `starcoder2:7b` (code-specialized model)
 
 ## Troubleshooting
