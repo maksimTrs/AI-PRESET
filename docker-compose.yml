@@ -40,7 +40,7 @@ x-ollama: &service-ollama
     - 11434:11434
   volumes:
     - ollama_storage:/root/.ollama
-  environment:
+  #environment:
     # experimental features
     #- OLLAMA_FLASH_ATTENTION=true
     #- OLLAMA_KV_CACHE_TYPE=f16
