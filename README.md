@@ -164,11 +164,11 @@ pgAdmin provides a comprehensive interface for managing your PostgreSQL database
    - Search for "Ollama" and create:
      - **Chat Model Credential**:
        - Name: `Local Ollama Chat`
-       - Base URL: `http://ollama:11434`
+       - Base URL: `http://ollama:11434/v1`
      - **Embeddings Credential**:
        - Name: `Local Ollama Embeddings`
-       - Base URL: `http://ollama:11434/v1`
-       - Model: `mxbai-embed-large` (or your configured embedding model)
+       - Base URL: `http://ollama:11434`
+       - Model: `nomic-embed-text`
 
 ### Using Imported Workflows
 
