@@ -41,9 +41,9 @@ x-ollama: &service-ollama
   volumes:
     - ollama_storage:/root/.ollama
   #environment:
-    # experimental features
+    # experimental features to decrease RAM usage:
     #- OLLAMA_FLASH_ATTENTION=true
-    #- OLLAMA_KV_CACHE_TYPE=f16
+    #- OLLAMA_KV_CACHE_TYPE=q8_0
 
 x-init-ollama: &init-ollama
   image: ollama/ollama:0.6.8
@@ -62,6 +62,7 @@ x-init-ollama: &init-ollama
       sleep 3
       
       # Pull large language models
+      OLLAMA_HOST=ollama:11434 ollama pull llama3.1:8b
       OLLAMA_HOST=ollama:11434 ollama pull qwen3:30b-a3b-q4_K_M
       OLLAMA_HOST=ollama:11434 ollama pull gemma3:12b-it-qat
       OLLAMA_HOST=ollama:11434 ollama pull mistral-small3.1:24b

@@ -193,6 +193,72 @@ The stack includes all components needed for Retrieval-Augmented Generation (RAG
 
 Open WebUI provides a ChatGPT-like interface for interacting with your local LLMs.
 
+## n8n Pipe Function for Open WebUI Integration
+
+The `n8n_pipe_function.py` file implements a custom pipe function that enables bidirectional communication between Open WebUI and n8n workflows. This integration allows you to extend your AI chatbot capabilities with n8n's powerful workflow automation.
+
+### How the Integration Works
+
+1. **Communication Flow**:
+   - User sends a message in Open WebUI
+   - The n8n pipe function intercepts the message
+   - Function makes an HTTP request to the n8n webhook
+   - n8n processes the message through its workflow
+   - n8n returns a response to Open WebUI
+   - Open WebUI displays the response to the user
+
+### Key Configuration Settings
+
+The pipe function uses a `Valves` class to manage configuration settings:
+
+```python
+class Valves(BaseModel):
+    n8n_url: str = Field(
+        default="https://n8n.[your domain].com/webhook/[your webhook URL]"
+    )
+    n8n_bearer_token: str = Field(default="...")
+    input_field: str = Field(default="chatInput")
+    response_field: str = Field(default="output")
+    emit_interval: float = Field(
+        default=2.0, description="Interval in seconds between status emissions"
+    )
+    enable_status_indicator: bool = Field(
+        default=True, description="Enable or disable status indicator emissions"
+    )
+```
+
+- **n8n_url**: The webhook URL of your n8n workflow
+- **n8n_bearer_token**: Authentication token for the n8n API
+- **input_field**: Field name used to pass user input to n8n
+- **response_field**: Field name to extract the response from n8n
+- **emit_interval**: How often to emit status updates during processing
+- **enable_status_indicator**: Toggle status indicators in the UI
+
+### Implementation Features
+
+- **Asynchronous Communication**: Uses `aiohttp` for non-blocking API calls
+- **Status Reporting**: Provides real-time feedback during processing
+- **Error Handling**: Comprehensive error handling and reporting
+- **Session Management**: Maintains chat context using session IDs
+
+### Using the Pipe Function
+
+1. Place the `n8n_pipe_function.py` file in your Open WebUI functions directory
+2. Configure the n8n webhook URL and bearer token in the file
+3. Create a corresponding webhook workflow in n8n that:
+   - Accepts input from the `chatInput` field
+   - Processes the request as needed
+   - Returns a response in the `output` field
+
+### Use Cases
+
+- **Database-powered chatbots**: Connect to databases for dynamic data retrieval
+- **Multi-API orchestration**: Integrate with multiple external services
+- **Document processing**: Generate, analyze, or transform documents
+- **Multi-model orchestration**: Use different AI models for specialized tasks
+
+For more details, see the [original article](https://www.pondhouse-data.com/blog/integrating-n8n-with-open-webui).
+
 ## Working with Qdrant
 
 Qdrant is a vector database for semantic similarity search, essential for RAG applications:
