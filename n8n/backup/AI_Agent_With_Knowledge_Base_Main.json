@@ -1,5 +1,5 @@
 {
-  "name": "AI_Agent_With_RAG__Store_Knowledge_Base",
+  "name": "AI_Agent_With_Knowledge_Base_Main",
   "nodes": [
     {
       "parameters": {
@@ -20,7 +20,7 @@
           }
         }
       },
-      "id": "824dadd4-b3d6-47e2-93c5-d576d1ae8ab7",
+      "id": "a59affd7-0149-4ccb-b8c2-31ef6a038348",
       "name": "Default Data Loader",
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
@@ -36,7 +36,7 @@
         "width": 563,
         "color": 7
       },
-      "id": "59c392e6-9a6f-45a1-8141-61406f24bfcb",
+      "id": "52f3ec54-1410-4ec3-92e8-4e153d5c5a40",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -52,7 +52,7 @@
         "width": 3593,
         "color": 5
       },
-      "id": "9ef83b0d-3956-4459-b35d-2e7ecac45ea6",
+      "id": "9837e7e8-25f8-44af-a7ad-5cc4108b2980",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -66,7 +66,7 @@
         "operation": "text",
         "options": {}
       },
-      "id": "8d5ea360-b07f-411b-af46-2dea736ac0d1",
+      "id": "a3f90545-82c2-4e97-bfb7-5c36815e2acd",
       "name": "Extract Document Text",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
@@ -78,7 +78,7 @@
     },
     {
       "parameters": {},
-      "id": "9855081b-de83-41fe-b727-f088afe42558",
+      "id": "201553fb-4e14-439a-a91f-f140c1a2a8ed",
       "name": "Postgres Chat Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1,
@@ -89,7 +89,7 @@
       "notesInFlow": false,
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -120,7 +120,7 @@
         },
         "options": {}
       },
-      "id": "09427b79-2ee5-4204-bde3-33fa5cdd76f5",
+      "id": "cada3977-a5c0-4df4-90f6-65ee678d6eb2",
       "name": "Set File ID",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -139,7 +139,7 @@
         "height": 605,
         "width": 1056
       },
-      "id": "85b25319-7abf-46e3-a4e2-de30a1496947",
+      "id": "1d300eb0-0daa-4e9f-96df-f0466e1fed5b",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -168,7 +168,7 @@
         },
         "options": {}
       },
-      "id": "7661f0d3-eb3a-475d-aa90-f5253f9db774",
+      "id": "a90795da-abdd-4741-a950-55a74d941217",
       "name": "Edit Fields",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -183,7 +183,7 @@
           "allowFileUploads": true
         }
       },
-      "id": "bbd2746e-3572-4125-9d8e-60e4337804fc",
+      "id": "70837029-7d47-49f7-bf5d-49897c4d5f77",
       "name": "When chat message received",
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
@@ -198,7 +198,7 @@
         "operation": "pdf",
         "options": {}
       },
-      "id": "de369d9e-1660-4e4f-8543-2e381f267eaf",
+      "id": "4c5aaa10-775a-4dfe-9987-74c80c13d2bd",
       "name": "Extract PDF Text",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
@@ -212,13 +212,13 @@
         "aggregate": "aggregateAllItemData",
         "options": {}
       },
-      "id": "5820b769-91d7-4b27-81b8-2762e9cf7648",
+      "id": "701e68ac-1216-46f5-9030-90bacfc0c06c",
       "name": "Aggregate",
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
         2820,
-        1160
+        1240
       ]
     },
     {
@@ -233,7 +233,7 @@
         },
         "options": {}
       },
-      "id": "1c116f28-60e6-4413-9993-76eeeee90c17",
+      "id": "6d4bf963-28a3-456a-aaf4-af0b98a89f8a",
       "name": "Summarize",
       "type": "n8n-nodes-base.summarize",
       "typeVersion": 1,
@@ -247,10 +247,10 @@
         "promptType": "define",
         "text": "={{ $json.chatInput }}",
         "options": {
-          "systemMessage": "You are a personal assistant who helps answer questions from a corpus of documents. The documents are either text based (Txt, docs, extracted PDFs, etc.) or tabular data (CSVs or Excel documents).\n\nYou are given tools to perform RAG in the 'documents' table, look up the documents available in your knowledge base in the 'document_metadata' table, extract all the text from a given document, and query the tabular files with SQL in the 'document_rows' table.\n\nAlways start by performing RAG unless the users asks you to check a document or the question requires a SQL query for tabular data (fetching a sum, finding a max, something a RAG lookup would be unreliable for). If RAG doesn't help, then look at the documents that are available to you, find a few that you think would contain the answer, and then analyze those.\n\nAlways tell the user if you didn't find the answer. Don't make something up just to please them.\n\nIf you are thinking model, then by default, do not show the user thinking process, using  \"/no_think\" option. If user will send in the message \"/think\" option, then activate thinking mode and show thinking tags and your mind steps."
+          "systemMessage": "You are a top-level personal assistant who helps answer questions from a corpus of documents. The documents are either text based (Txt, docs, extracted PDFs, etc.) or tabular data (CSVs or Excel documents).\n\nYou are given tools to perform RAG in the 'documents' table, look up the documents available in your knowledge base in the 'document_metadata' table, extract all the text from a given document, and query the tabular files with SQL in the 'document_rows' table.\n\nAlways start by performing RAG. If RAG doesn't help, then look at the documents that are available to you, find a few that you think would contain the answer, and then analyze those.\n\nIMPORTANT:\n- Always tell the user if you didn't find the answer, but before that try to use RAG knowledgebase to find the data that user asked. Try to use for searching any related DB tables/internal related system data that you can find.\n- Do NOT make something up just to please user and DO NOT give the answer using your own LLM knowledge data - main goal here is the retrieve data from the internal knowledge base.\n\nIf you are thinking model, then by default, do not show the user thinking process. If user will send in the message \"/think\" option, then show thinking tags and your mind steps inside."
         }
       },
-      "id": "d05f5f09-f8f5-4e1c-875e-729094cae0dd",
+      "id": "70c15991-06ae-464b-90f5-28f4524ba191",
       "name": "RAG AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.6,
@@ -383,7 +383,7 @@
           "fallbackOutput": "none"
         }
       },
-      "id": "e19fd8c6-f730-44fd-8371-618e808ec000",
+      "id": "4dcba56f-0224-4614-a7fb-34e063b4c371",
       "name": "Switch",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
@@ -397,7 +397,7 @@
         "operation": "xlsx",
         "options": {}
       },
-      "id": "554dee34-ff64-482f-b4f0-ff25e203955f",
+      "id": "aaa9f964-32d2-4cc9-a999-79df8f4a576c",
       "name": "Extract from Excel",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
@@ -416,7 +416,7 @@
         2600,
         1460
       ],
-      "id": "9d76cf96-b435-4c87-bd34-a132b32462e1",
+      "id": "86ab1f05-e8a1-4e8d-8740-0ee5f9f765d4",
       "name": "Extract from CSV"
     },
     {
@@ -432,7 +432,7 @@
         640
       ],
       "typeVersion": 1,
-      "id": "b4bfbc58-5a91-4c3f-8635-d94a4444e892",
+      "id": "64e23fb4-ba86-40ff-9517-87d1b0e4f871",
       "name": "Sticky Note3"
     },
     {
@@ -447,11 +447,11 @@
         660,
         740
       ],
-      "id": "6e4fbfb7-4613-43ea-86ec-e2538484351a",
+      "id": "a763aaf5-6054-49e8-bd3d-1afb6def4c4f",
       "name": "Create Document Metadata Table",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -468,11 +468,11 @@
         1020,
         740
       ],
-      "id": "d3d64603-82a6-46c2-af0e-219cbac529eb",
+      "id": "041755e8-c7a1-41ae-b788-ca877f068703",
       "name": "Create Document Rows Table (for Tabular Data)",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -502,11 +502,11 @@
         1220,
         380
       ],
-      "id": "5a387762-e68d-4861-b2c2-df27326c62c8",
+      "id": "1d764dfb-e44c-4226-a301-c4d8296845f6",
       "name": "List Documents",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -527,11 +527,11 @@
         1360,
         380
       ],
-      "id": "42cdcf03-427f-4094-b5c4-b4aa29310e75",
+      "id": "45e46c32-b17a-41de-b476-110ebe9e7c53",
       "name": "Get File Contents",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -548,7 +548,7 @@
         860,
         1060
       ],
-      "id": "6beb16d8-16d4-4d7c-a5df-9a38c61e0edb",
+      "id": "4ad206e0-1119-4d83-b8ff-9074ae064380",
       "name": "Loop Over Items"
     },
     {
@@ -625,12 +625,12 @@
         1720,
         1160
       ],
-      "id": "78c5a149-3e78-4364-afe0-514571446817",
+      "id": "aaafaea0-08fe-4a91-b05c-f5b7a18dfe45",
       "name": "Insert Document Metadata",
       "executeOnce": true,
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -648,7 +648,7 @@
         0
       ],
       "typeVersion": 1,
-      "id": "9d1f5d22-849f-44d0-8a51-bc21f6e33483",
+      "id": "42286f0d-67fd-435e-802c-b4dbc339317c",
       "name": "Sticky Note9"
     },
     {
@@ -659,8 +659,8 @@
           "add"
         ],
         "options": {
-          "awaitWriteFinish": false,
-          "followSymlinks": false,
+          "awaitWriteFinish": true,
+          "followSymlinks": true,
           "usePolling": true
         }
       },
@@ -670,7 +670,7 @@
         660,
         1060
       ],
-      "id": "7aaab40a-6d36-4aed-8b44-13a942f7cf94",
+      "id": "f2c05024-2d24-4612-aae2-5b3a03ebd2fb",
       "name": "Local File Trigger"
     },
     {
@@ -686,12 +686,12 @@
         1920,
         1160
       ],
-      "id": "e3ba62bc-8a97-4945-8543-70a756bc8540",
+      "id": "be307f1b-5d75-4e28-b6e7-354c1a2fb3b6",
       "name": "Read/Write Files from Disk"
     },
     {
       "parameters": {
-        "model": "mxbai-embed-large:latest"
+        "model": "nomic-embed-text:latest"
       },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
@@ -699,31 +699,31 @@
         3300,
         1560
       ],
-      "id": "f0163f2c-eb2d-4fe6-9e17-9906853966ff",
+      "id": "0c2be540-eb56-406c-852f-453777ff1cf1",
       "name": "Embeddings Ollama",
       "credentials": {
         "ollamaApi": {
-          "id": "QSthBKEMhO70OOvr",
-          "name": "Ollama account"
+          "id": "QOtO7EikaPsE96ml",
+          "name": "LLM VECTOR ACCOUNT"
         }
       }
     },
     {
       "parameters": {
-        "model": "mxbai-embed-large:latest"
+        "model": "nomic-embed-text:latest"
       },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
       "position": [
-        1780,
-        400
+        1880,
+        440
       ],
-      "id": "61ef5a8b-62e6-47a2-9cb3-f9d28ba5c53a",
+      "id": "f25ae1ff-b295-46d7-9a7b-1b52e67ec9bf",
       "name": "Embeddings Ollama1",
       "credentials": {
         "ollamaApi": {
-          "id": "QSthBKEMhO70OOvr",
-          "name": "Ollama account"
+          "id": "QOtO7EikaPsE96ml",
+          "name": "LLM VECTOR ACCOUNT"
         }
       }
     },
@@ -738,16 +738,16 @@
         3520,
         1760
       ],
-      "id": "8dac78db-e512-46c7-8562-96db73c1b3e0",
+      "id": "06a68057-0278-4d4b-942a-ab71a9670824",
       "name": "Recursive Character Text Splitter"
     },
     {
       "parameters": {
         "model": {
           "__rl": true,
-          "value": "qwen2.5:14b-instruct-q4_K_M",
+          "value": "mistral-small3.1:24b",
           "mode": "list",
-          "cachedResultName": "qwen2.5:14b-instruct-q4_K_M"
+          "cachedResultName": "mistral-small3.1:24b"
         },
         "options": {
           "temperature": 0.2,
@@ -760,12 +760,12 @@
         880,
         380
       ],
-      "id": "29491b75-2f03-4b77-9f9d-f48add52c248",
+      "id": "8c905aeb-2f02-4335-914a-6a2549e3e695",
       "name": "Ollama (Change Base URL)",
       "credentials": {
         "openAiApi": {
-          "id": "p56yYcg8iZWrCBeE",
-          "name": "LLM ACC"
+          "id": "Xz3nYHXxCXgVv2ta",
+          "name": "LLM ACCOUNT"
         }
       }
     },
@@ -782,7 +782,7 @@
         1360
       ],
       "typeVersion": 1,
-      "id": "b450133f-b0cf-4845-b991-a10b4b726b17",
+      "id": "9857f2fa-c009-4fbb-9ddf-baeec70b0768",
       "name": "Sticky Note4"
     },
     {
@@ -797,11 +797,11 @@
         3400,
         1220
       ],
-      "id": "7e737ff3-4874-410b-ba5b-6e3f92bccc5c",
+      "id": "d1bfd5d6-3b59-4216-af88-aeb07f716f16",
       "name": "Postgres PGVector Store",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -810,22 +810,22 @@
       "parameters": {
         "mode": "retrieve-as-tool",
         "toolName": "documents",
-        "toolDescription": "Use RAG to look up information in the knowledgebase.",
+        "toolDescription": "Use RAG to look up information in the knowledgebase.\nUse it for each user message to check data for the answer.",
         "tableName": "documents_pg",
-        "topK": 5,
+        "topK": 7,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
       "typeVersion": 1,
       "position": [
-        1720,
+        1860,
         240
       ],
-      "id": "15841ea6-1b2c-4127-b8b9-c168f3029c51",
+      "id": "4960850d-6bbc-48d5-9aab-d06c85e83ac4",
       "name": "Postgres PGVector Store1",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       }
@@ -844,7 +844,7 @@
         2580,
         1840
       ],
-      "id": "4be16df6-4592-476e-a682-c1522d0919c1",
+      "id": "4b354096-44b0-433b-ac60-e63c5aea62b4",
       "name": "AI Agent"
     },
     {
@@ -863,35 +863,12 @@
         2600,
         2060
       ],
-      "id": "74048fab-814c-426a-96c1-b815ea43e0b3",
+      "id": "0e0dc82a-4011-4fc7-bd35-8fbbfe23a91c",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "p56yYcg8iZWrCBeE",
-          "name": "LLM ACC"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "Run a SQL query - use this to query from the document_rows table once you know the file ID (which is the file path) you are querying. dataset_id is the file_id (file path) and you are always using the row_data for filtering, which is a jsonb field that has all the keys from the file schema given in the document_metadata table.\n\nExample query:\n\nSELECT AVG((row_data->>'revenue')::numeric)\nFROM document_rows\nWHERE dataset_id = '/data/shared/document.csv';\n\nExample query 2:\n\nSELECT \n    row_data->>'category' as category,\n    SUM((row_data->>'sales')::numeric) as total_sales\nFROM dataset_rows\nWHERE dataset_id = '/data/shared/document2.csv'\nGROUP BY row_data->>'category';",
-        "operation": "executeQuery",
-        "query": "{{ $fromAI('sql_query') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgresTool",
-      "typeVersion": 2.5,
-      "position": [
-        1500,
-        380
-      ],
-      "id": "cdee4826-1a98-444b-8cb5-d0ce1b144bca",
-      "name": "Query Document Rows",
-      "credentials": {
-        "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
-          "name": "Postgres account"
+          "id": "Xz3nYHXxCXgVv2ta",
+          "name": "LLM ACCOUNT"
         }
       }
     },
@@ -909,11 +886,11 @@
         1280,
         1160
       ],
-      "id": "0899f47a-7b27-45d0-ba0d-ee336e61b59d",
+      "id": "847f63d1-0ff4-43c7-847d-a73e1bbd607d",
       "name": "Delete Old Doc Records",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       },
@@ -933,15 +910,68 @@
         1480,
         1160
       ],
-      "id": "2d652079-7b5d-46d8-885a-4de984e88b94",
+      "id": "700c21cf-18d8-4a67-a5e0-42c26db66c17",
       "name": "Delete Old Data Records",
       "credentials": {
         "postgres": {
-          "id": "zP7XNd53r7Jmcj0F",
+          "id": "58sXURfKEk0hogYP",
           "name": "Postgres account"
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "id": "d2f8381f-1906-4f22-9ca5-2ec46e91413e",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        660,
+        1620
+      ]
+    },
+    {
+      "parameters": {
+        "command": "find /data/shared -maxdepth 1 -type f"
+      },
+      "id": "a727d690-bf4d-4a6f-815e-f7634cee90df",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        880,
+        1620
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stdout = $input.first().json.stdout;\nconst lignes = stdout.split('\\n').filter(l => l.trim() !== '');\n\nreturn lignes.map(path => {\n  const parts = path.split('/');\n  const fileName = parts[parts.length - 1];\n\n  return {\n    json: {\n      fileName,\n      path\n    }\n  };\n});"
+      },
+      "id": "45c745cd-89fd-45b3-ad26-f76e1d522abc",
+      "name": "Format File List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        1620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## RAG File Processing\nThis workflow:\n1. Manually triggers or can be scheduled\n2. Finds files in the /data/shared directory\n3. Formats the file list for further processing\n\nYou can modify the 'find' command to suit your needs:\n- Change the directory path\n- Adjust maxdepth to include subdirectories\n- Add filters for specific file types",
+        "height": 280,
+        "width": 580,
+        "color": 5
+      },
+      "id": "8f7db2fe-2266-4066-b832-3332f88be7d3",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1620
+      ]
     }
   ],
   "pinData": {},
@@ -1261,17 +1291,6 @@
         ]
       ]
     },
-    "Query Document Rows": {
-      "ai_tool": [
-        [
-          {
-            "node": "RAG AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Delete Old Doc Records": {
       "main": [
         [
@@ -1293,17 +1312,50 @@
           }
         ]
       ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "Format File List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format File List": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "cccb0fd3-93a5-4420-a384-afc64c804538",
+  "versionId": "2012c777-7281-4e55-a8b2-65cb56beac63",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4b39a23497a68e3cb63f69550c3d8b1a8faf258d354e078bb588609ec718f822"
   },
-  "id": "GIBVCgTeEC5nJicG",
+  "id": "nfq5vZuvWIQ9d2uo",
   "tags": []
 }
