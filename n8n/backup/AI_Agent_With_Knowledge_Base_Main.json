@@ -137,14 +137,14 @@
       "parameters": {
         "content": "## RAG AI Agent with Chat Interface",
         "height": 605,
-        "width": 1056
+        "width": 1076
       },
       "id": "1d300eb0-0daa-4e9f-96df-f0466e1fed5b",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        600,
+        580,
         0
       ]
     },
@@ -972,6 +972,37 @@
         0,
         1620
       ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "38f6acef-a45c-492e-9e5d-0cfec9575575",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        140
+      ],
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "59c275af-81d6-46b5-ab4b-301b43076b6b",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        640,
+        360
+      ],
+      "id": "521261e2-7b1e-4bf8-b750-5a6ff513e78c",
+      "name": "Webhook1",
+      "webhookId": "59c275af-81d6-46b5-ab4b-301b43076b6b"
     }
   ],
   "pinData": {},
@@ -1345,13 +1376,35 @@
           }
         ]
       ]
+    },
+    "RAG AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2012c777-7281-4e55-a8b2-65cb56beac63",
+  "versionId": "7887bb6b-06b3-4345-bfa0-2102db82abed",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4b39a23497a68e3cb63f69550c3d8b1a8faf258d354e078bb588609ec718f822"
