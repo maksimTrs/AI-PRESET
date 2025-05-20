@@ -4,6 +4,7 @@ article: https://www.pondhouse-data.com/blog/integrating-n8n-with-open-webui
 version: 0.2.0
 
 This module defines a Pipe class that utilizes an N8N workflow for an Agent
+n8n webhook URL: http://host.docker.internal:5678/webhook-test/[your webhook URL]
 """
 
 from typing import Optional, Callable, Awaitable
