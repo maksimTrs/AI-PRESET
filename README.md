@@ -60,24 +60,24 @@ Ensure the following directory structure exists:
 
 ```
 AI-PRESET/
-├── .env                   # Environment variables (create this file)
-├── docker-compose.yml     # Docker Compose configuration
+├── .env                                     # Environment variables (create this file)
+├── docker-compose.yml                       # Docker Compose configuration
+├── n8n_pipe_function.py                    # Custom pipe function for Open WebUI integration
+├── functions-export-1747750482065.json     # Function definition for Open WebUI
 ├── n8n/
 │   └── backup/
-│       ├── credentials/   # Place n8n credential backups here
-│       └── workflows/     # Place n8n workflow backups here
-└── shared/                # Shared files accessible to services
+│       └── AI_Agent_With_Knowledge_Base_Main.json  # RAG implementation workflow
+└── shared/                                 # Shared files accessible to services
 ```
 
 If the directories don't exist, create them with:
 
 ```bash
 # On Linux/macOS/Git Bash
-mkdir -p ./n8n/backup/credentials ./n8n/backup/workflows ./shared
+mkdir -p ./n8n/backup ./shared
 
 # On Windows CMD/PowerShell
-mkdir n8n\backup\credentials
-mkdir n8n\backup\workflows
+mkdir n8n\backup
 mkdir shared
 ```
 
@@ -193,9 +193,30 @@ The stack includes all components needed for Retrieval-Augmented Generation (RAG
 
 Open WebUI provides a ChatGPT-like interface for interacting with your local LLMs.
 
+## Project Files
+
+This repository includes several important files for setting up your AI environment:
+
+- **docker-compose.yml**: Main configuration file for the Docker services
+- **n8n_pipe_function.py**: Custom pipe function for Open WebUI and n8n integration
+- **functions-export-1747750482065.json**: Exported function definition for Open WebUI
+- **n8n/backup/AI_Agent_With_Knowledge_Base_Main.json**: n8n workflow for RAG implementation
+
 ## n8n Pipe Function for Open WebUI Integration
 
 The `n8n_pipe_function.py` file implements a custom pipe function that enables bidirectional communication between Open WebUI and n8n workflows. This integration allows you to extend your AI chatbot capabilities with n8n's powerful workflow automation.
+
+### Setting Up the Function in Open WebUI
+
+1. Navigate to Open WebUI at [http://localhost:3000](http://localhost:3000)
+2. Log in with your administrator account
+3. Go to the Administrator section
+4. Select the "Functions" tab
+5. Click "Import Function"
+6. Upload the `functions-export-1747750482065.json` file
+7. After importing, edit the function to update the webhook URL
+8. Change the URL to use `http://host.docker.internal:5678/webhook-test/[your webhook URL]` instead of the default localhost URL
+   - Note: `host.docker.internal` is required for proper communication between Docker containers
 
 ### How the Integration Works
 
