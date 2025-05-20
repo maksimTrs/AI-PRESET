@@ -89,7 +89,7 @@ services:
       - open-webui:/app/backend/data
     environment:
       - WEBUI_AUTH=false
-      - WEBUI_LANGUAGE=en
+      - DEFAULT_LOCALE=en
 
   postgres:
     image: pgvector/pgvector:pg16
