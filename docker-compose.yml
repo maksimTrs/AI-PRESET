@@ -48,7 +48,8 @@ x-ollama: &service-ollama
   #environment:
     # experimental features to decrease RAM usage:
     #- OLLAMA_FLASH_ATTENTION=true
-    #- OLLAMA_KV_CACHE_TYPE=q8_0
+    #- OLLAMA_KV_CACHE_TYPE=f16
+    #- OLLAMA_MAX_LOADED_MODELS=1
 
 x-init-ollama: &init-ollama
   image: ollama/ollama:0.6.8
