@@ -72,9 +72,7 @@ x-init-ollama: &init-ollama
       OLLAMA_HOST=ollama:11434 ollama pull qwen3:30b-a3b-q4_K_M
       OLLAMA_HOST=ollama:11434 ollama pull gemma3:12b-it-qat
       OLLAMA_HOST=ollama:11434 ollama pull mistral-small3.1:24b
-      #OLLAMA_HOST=ollama:11434 ollama pull deepseek-r1:14b
-      #OLLAMA_HOST=ollama:11434 ollama pull qwen2.5-coder:14b
-      #OLLAMA_HOST=ollama:11434 ollama pull starcoder2:7b
+      #OLLAMA_HOST=ollama:11434 ollama pull devstral:24b
       
       # Pull embedding model
       OLLAMA_HOST=ollama:11434 ollama pull nomic-embed-text

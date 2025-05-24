@@ -314,9 +314,7 @@ Default active models:
 - `nomic-embed-text` (embedding model)
 
 Additional models available (commented out by default):
-- `deepseek-r1:14b` (chat model)
-- `qwen2.5-coder:14b` (code-specialized model)
-- `starcoder2:7b` (code-specialized model)
+- `devstral:24b` (chat model)
 
 ## Troubleshooting
 
