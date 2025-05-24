@@ -67,7 +67,7 @@ x-init-ollama: &init-ollama
       # Pull large language models
       OLLAMA_HOST=ollama:11434 ollama pull gemma3:12b-it-qat
       OLLAMA_HOST=ollama:11434 ollama pull mistral-small3.1:24b
-      #OLLAMA_HOST=ollama:11434 ollama pull qwen3:30b-a3b-q4_K_M
+      OLLAMA_HOST=ollama:11434 ollama pull qwen3:30b-a3b-q4_K_M
       #OLLAMA_HOST=ollama:11434 ollama pull devstral:24b
       
       # Pull embedding model
