@@ -90,9 +90,9 @@ AI-PRESET/
 ## 🤖 Available Models
 
 **Default Models** (automatically downloaded):
-- `llama3.1:8b` - General chat
-- `gemma3:12b-it-qat` - Instruction following
+- `gemma3:12b-it-qat` - Instruction following with images support
 - `mistral-small3.1:24b` - Advanced reasoning
+- `qwen3:30b-a3b-q4_K_M` - Large multilingual model with or without advanced reasoning (https://qwenlm.github.io/blog/qwen3/#advanced-usages)
 - `nomic-embed-text` - Text embeddings
 
 **To customize models**: Edit `docker-compose.yml` → `x-init-ollama` section → `ollama pull` commands
