@@ -1,6 +1,6 @@
 # AI-PRESET: Local AI Stack Setup Guide
 
-This repository contains a Docker Compose setup for running a complete local AI stack with n8n, Ollama (LLM), Qdrant (Vector DB), and user-friendly UI tools. This guide will help you get started with the setup, configuration, and usage of the various components.
+This repository contains a Docker Compose setup for running a complete local AI stack with n8n, Ollama (LLM), PostgreSQL with pgvector (Vector DB), and user-friendly UI tools. This guide will help you get started with the setup, configuration, and usage of the various components.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ This repository contains a Docker Compose setup for running a complete local AI 
 - [Working with pgAdmin](#working-with-pgadmin)
 - [Working with n8n](#working-with-n8n)
 - [Using Open WebUI](#using-open-webui)
-- [Working with Qdrant](#working-with-qdrant)
+
 - [Customizing Ollama Models](#customizing-ollama-models)
 - [Troubleshooting](#troubleshooting)
 - [Security Considerations](#security-considerations)
@@ -120,8 +120,7 @@ Once the stack is running, access the services at:
   - Create a local account on first use
   - Configure to use Ollama models
 
-- **Qdrant Dashboard**: [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
-  - Basic overview of vector collections
+
 
 - **pgAdmin**: [http://localhost:5050](http://localhost:5050)
   - PostgreSQL database management interface
@@ -179,7 +178,7 @@ If you've placed workflow files in `n8n/backup/workflows` before the first start
 The stack includes all components needed for Retrieval-Augmented Generation (RAG):
 1. Use n8n to process documents from the `shared` directory
 2. Generate embeddings with Ollama's embedding model
-3. Store vectors in Qdrant
+3. Store vectors in PostgreSQL with pgvector extension
 4. Create workflows that retrieve relevant context and send to LLM
 
 ## Using Open WebUI
@@ -280,17 +279,7 @@ class Valves(BaseModel):
 
 For more details, see the [original article](https://www.pondhouse-data.com/blog/integrating-n8n-with-open-webui).
 
-## Working with Qdrant
 
-Qdrant is a vector database for semantic similarity search, essential for RAG applications:
-
-- **Dashboard**: [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
-- **API Endpoint**: http://localhost:6333
-
-In n8n workflows, use the HTTP Request node to interact with Qdrant's REST API:
-- Create collections
-- Upload vectors
-- Perform similarity searches
 
 ## Customizing Ollama Models
 
