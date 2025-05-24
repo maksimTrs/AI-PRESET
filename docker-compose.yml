@@ -88,9 +88,57 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - open-webui:/app/backend/data
+      - ./open-webui-functions-for-import.json:/app/backend/functions-export.json:ro
     environment:
-      - WEBUI_AUTH=false
       - DEFAULT_LOCALE=en
+      - WEBUI_ADMIN_EMAIL=${WEBUI_ADMIN_EMAIL}
+      - WEBUI_ADMIN_USER=${WEBUI_ADMIN_USER}
+      - WEBUI_ADMIN_PASS=${WEBUI_ADMIN_PASS}
+    entrypoint:
+      - bash
+      - -c
+      - |
+        echo "Starting Open WebUI server..."
+        /app/backend/start.sh &
+        
+        # Wait for Open WebUI API to become available
+        echo "Waiting for Open WebUI to start..."
+        while ! curl -s -o /dev/null "http://localhost:8080/health"; do
+          sleep 2;
+        done
+        echo "Open WebUI started successfully"
+        
+        # Sign up default admin user
+        echo "Creating default admin user..."
+        SIGNUP_RESPONSE=$$(curl -s -X POST "http://localhost:8080/api/v1/auths/signup" \
+          -H "Content-Type: application/json" \
+          --data-raw "{\"name\":\"$${WEBUI_ADMIN_USER}\", \"email\":\"$${WEBUI_ADMIN_EMAIL}\", \"password\":\"$${WEBUI_ADMIN_PASS}\"}")
+        
+        API_KEY=$$(echo "$${SIGNUP_RESPONSE}" | jq -r '.token')
+        echo "Received API_KEY for function import"
+        
+        # Import functions from JSON file
+        if [ -f "/app/backend/functions-export.json" ]; then
+          echo "Importing functions from JSON file..."
+          FUNCTIONS_DATA=$$(cat /app/backend/functions-export.json)
+          
+          # Parse and import each function from the JSON array
+          echo "$${FUNCTIONS_DATA}" | jq -c '.[]' | while read -r function_data; do
+            FUNCTION_NAME=$$(echo "$${function_data}" | jq -r '.name')
+            echo "Importing function: $${FUNCTION_NAME}"
+            
+            curl -s -X POST "http://localhost:8080/api/v1/functions/create" \
+              -H "Authorization: Bearer $${API_KEY}" \
+              -H "Content-Type: application/json" \
+              --data-raw "$${function_data}" || echo "Failed to import function: $${FUNCTION_NAME}"
+          done
+          echo "Function import process completed"
+        else
+          echo "No functions export file found at /app/backend/functions-export.json"
+        fi
+        
+        # Keep the container running
+        wait
 
   postgres:
     image: pgvector/pgvector:pg16
