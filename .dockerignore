@@ -18,6 +18,7 @@ build/
 *.egg-info/
 *.tgz
 *.tar.gz
+shared/
 
 # Exclude siles and folders
 *.yml
