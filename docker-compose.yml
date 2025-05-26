@@ -234,3 +234,21 @@ services:
     <<: *init-ollama
     depends_on:
       - ollama-gpu
+
+  docling:
+    image: quay.io/docling-project/docling-serve
+    container_name: docling-serve
+    networks:
+      - demo
+      - external_net
+    restart: unless-stopped
+    ports:
+      - 5001:5001
+    environment:
+      - DOCLING_SERVE_ENABLE_UI=true
+      - DOCLING_SERVE_MAX_DOCUMENT_TIMEOUT=1800 # 30 minutes
+      - DOCLING_SERVE_MAX_SYNC_WAIT=2100 # 35 minutes
+      #- DOCLING_SERVE_MAX_NUM_PAGES=50
+      #- DOCLING_SERVE_MAX_FILE_SIZE=15728640 # 15MB
+    depends_on:
+      - n8n
