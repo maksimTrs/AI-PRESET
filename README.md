@@ -1,6 +1,6 @@
 # AI-PRESET: Complete Local AI Stack
 
-A Docker Compose setup for running a complete local AI stack with **n8n**, **Ollama (LLM)**, **PostgreSQL with pgvector**, and **Open WebUI**. Includes automatic function import for seamless n8n-Open WebUI integration.
+A Docker Compose setup for running a complete local AI stack with **n8n**, **Ollama (LLM)**, **PostgreSQL with pgvector**, **Docling (Document Parser)**, and **Open WebUI**. Includes automatic function import for seamless n8n-Open WebUI integration.
 
 ## 🚀 Quick Start
 
@@ -61,6 +61,7 @@ AI-PRESET/
 |---------|-----|---------|
 | **Open WebUI** | [localhost:3000](http://localhost:3000) | ChatGPT-like interface |
 | **n8n** | [localhost:5678](http://localhost:5678) | Workflow automation |
+| **Docling** | [localhost:5001](http://localhost:5001) | Document parsing & OCR |
 | **pgAdmin** | [localhost:5050](http://localhost:5050) | Database management |
 | **Ollama API** | localhost:11434 | LLM API endpoint |
 
@@ -80,6 +81,19 @@ AI-PRESET/
 2. **Add Ollama credentials**:
    - **Chat Model**: Base URL `http://ollama:11434/v1`
    - **Embeddings**: Base URL `http://ollama:11434`, Model `nomic-embed-text`
+
+### Docling Setup (Document Processing)
+**Basic HTTP Request Configuration for n8n:**
+- **Method**: POST
+- **URL**: `http://host.docker.internal:5001/v1alpha/convert/file`
+- **Headers**: `accept: application/json`
+- **Body Type**: Form-Data
+- **Parameters**:
+  - `files`: [Binary File] - Your document
+  - `options`: [Form Data] - `{"include_images": true, "do_ocr": true}`
+
+**Supported formats**: PDF, DOCX, XLSX, PPTX, Images, HTML, Markdown
+**Features**: Advanced PDF parsing, table extraction, OCR, layout analysis
 
 ### pgAdmin Setup
 1. Login with credentials from `.env`
@@ -112,7 +126,8 @@ AI-PRESET/
 - ✅ **Error handling** and reporting
 
 ### Use Cases
-- **RAG Applications**: Document processing with vector search
+- **RAG Applications**: Document processing with Docling + vector search
+- **Document Analysis**: PDF parsing, table extraction, OCR processing
 - **Database Integration**: Dynamic data retrieval
 - **Multi-API Orchestration**: Complex workflow automation
 - **Custom AI Agents**: Specialized task automation
@@ -122,6 +137,7 @@ AI-PRESET/
 ### Services
 - **open-webui**: ChatGPT-like interface with auto-imported functions
 - **n8n**: Workflow automation with auto-imported workflows
+- **docling**: Document parsing and OCR service
 - **postgres**: PostgreSQL with pgvector extension
 - **pgadmin**: Database management interface
 - **ollama-cpu/gpu**: LLM inference engine
