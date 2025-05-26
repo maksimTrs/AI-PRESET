@@ -182,7 +182,9 @@ services:
     entrypoint: /bin/sh
     command:
       - "-c"
-      - "n8n import:workflow --input=/backup/AI_Agent_With_Knowledge_Base_Main.json"
+      - |
+        n8n import:workflow --input=/backup/AI_Agent_With_Knowledge_Base_Main.json
+        n8n import:workflow --input=/backup/AI_Agent_With_Knowledge_Base_Final.json
     volumes:
       - ./n8n/backup:/backup
     depends_on:
