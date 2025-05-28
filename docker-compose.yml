@@ -50,7 +50,7 @@ x-ollama: &service-ollama
     #- OLLAMA_MAX_LOADED_MODELS=1
 
 x-init-ollama: &init-ollama
-  image: ollama/ollama:0.6.8
+  image: ollama/ollama:latest
   networks:
     - demo
     - external_net

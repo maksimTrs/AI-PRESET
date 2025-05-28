@@ -2,6 +2,8 @@
 
 A Docker Compose setup for running a complete local AI stack with **n8n**, **Ollama (LLM)**, **PostgreSQL with pgvector**, **Docling (Document Parser)**, and **Open WebUI**. Includes automatic function import for seamless n8n-Open WebUI integration.
 
+> ⚠️ **IMPORTANT**: The LLM models require approximately **50 GB of disk space**. Ensure you have sufficient storage before starting the stack.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -107,6 +109,7 @@ AI-PRESET/
 - `gemma3:12b-it-qat` - Lightweight model with multimodal and images understanding
 - `mistral-small3.1:24b` - Efficient multimodal model excelling at multilingual tasks, images understanding
 - `qwen3:30b-a3b-q4_K_M` - Model with Hybrid Thinking Mode (https://qwenlm.github.io/blog/qwen3/#advanced-usages)
+- `qwen2.5vl:32b` - Advanced vision-language model with enhanced multimodal capabilities
 - `nomic-embed-text` - Text embeddings
 
 **To customize models**: Edit `docker-compose.yml` → `x-init-ollama` section → `ollama pull` commands
