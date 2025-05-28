@@ -15,7 +15,8 @@ networks:
 
 x-n8n: &service-n8n
   image: n8nio/n8n:1.91.3
-  networks: ['demo']
+  networks:
+    - demo
   environment:
     - DB_TYPE=postgresdb
     - DB_POSTGRESDB_HOST=postgres
@@ -142,7 +143,8 @@ services:
 
   postgres:
     image: pgvector/pgvector:pg16
-    networks: ['demo']
+    networks:
+      - demo
     restart: unless-stopped
     container_name: postgres
     ports:
