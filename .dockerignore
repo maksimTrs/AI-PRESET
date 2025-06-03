@@ -4,11 +4,18 @@ __pycache__
 
 # Virtual environment directories
 *.venv
-
-# Env
+venv/
+venv2/
 env/
-*.env*
 .env_example
+
+# Env files (security critical)
+*.env*
+.env
+.env.local
+.env.production
+.env.development
+.env.test
 
 # Distribution / build files
 site
@@ -20,26 +27,33 @@ build/
 *.tar.gz
 shared/
 
-# Exclude siles and folders
+# Docker-related files (prevent recursion)
 *.yml
 .dockerignore
-Dockerfile
+Dockerfile*
 Makefile
+docker-compose*.yml
+docker-compose*.yaml
 
-# Exclude other projects
+# Exclude other projects and tests
 /tests
 /scripts
+test/
+tests/
+spec/
+specs/
 
 # Python version manager file
 .python-version
 
-# Reports
+# Reports and logs
 *.coverage/
 *.log
 log/
+logs/
 *.logfire
 
-# Cache
+# Cache directories
 .cache/
 .mypy_cache
 .pytest_cache
@@ -47,18 +61,108 @@ log/
 .gradio
 .logfire
 temp/
+tmp/
+
+# Database files and data directories
+*.db
+*.sqlite
+*.sqlite3
+chroma_db/
+data/
+database/
+db/
+postgres_data/
+pgadmin_data/
+
+# AI/ML Model files and directories
+models/
+*.model
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.bin
+ollama_storage/
+embeddings/
+checkpoints/
+weights/
+
+# Credentials and security files
+creds/
+credentials/
+credentials.json
+token.json
+*.key
+*.pem
+*.cert
+*.crt
+secrets/
+.secrets/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
 
 # MacOS-related files
 .DS_Store
+.AppleDouble
+.LSOverride
 
-# VS Code settings (local configuration files)
-.vscode
+# Windows-related files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# file
+# VS Code and IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation and project files
 TODO.md
+CHANGELOG.md
+*.md.backup
+docs/
 
-# Exclude Git-related files
-.git
-.github
+# Git-related files
+.git/
+.github/
 .gitignore
+.gitattributes
 .pre-commit-config.yaml
+
+# Backup and temporary files
+backup/
+backups/
+*.backup
+*.bak
+*.orig
+*.tmp
+
+# Runtime and process files
+*.pid
+*.sock
+*.lock
+
+# Coverage and test reports
+coverage/
+.coverage
+.nyc_output
+htmlcov/
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
+*.ipynb
+
+# Large data files
+*.csv
+*.json.gz
+*.parquet
+*.pickle
+*.pkl
